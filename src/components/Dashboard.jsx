@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 
 function Dashboard() {
   return (
-    <div>
+    <div className='w-full'>
         <Navbar/>
     </div>
   )
