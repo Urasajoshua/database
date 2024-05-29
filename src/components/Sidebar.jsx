@@ -15,12 +15,12 @@ function Sidebar() {
                 </a>
             </li>
             <li className='mb-2 rounded hover:bg-blue-500 hover:shadow py-2'>
-                <a href='/' className='px-3'>
+                <a href='/departments' className='px-3'>
                     Departments
                 </a>
             </li>
             <li className='mb-2 rounded hover:bg-blue-500 hover:shadow py-2'>
-                <a href='/' className='px-3'>
+                <a href='/courses' className='px-3'>
                     Courses
                 </a>
             </li>
