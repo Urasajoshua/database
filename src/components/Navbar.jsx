@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
-import { useSelector } from "react-redux";
 
 function Navbar() {
-  const user = useSelector((state) => state.user.user.user);
-  console.log('this is user',user);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    setUser(storedUser);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    setUser(null);
+    // Optionally navigate to login page or home page
+  };
 
   return (
     <div className="flex bg-gray-800 px-4 justify-between ml-64">
@@ -24,7 +35,7 @@ function Navbar() {
         </div>
       </div>
       <div className="flex items-center gap-x-5">
-        {/**space for notifications icons */}
+        {/** space for notifications icons */}
         <div>
           <Icon
             icon="ion:notifications-outline"
@@ -39,10 +50,10 @@ function Navbar() {
             <div className="z-10 hidden bg-white absolute rounded-lg shadow w-32 group-focus:block top-full right-0">
               <ul className="py-2 text-sm text-gray-950 space-y-4">
                 <li>
-                  <a>{user ? `${user.firstname} ${user.middlename}` : 'Profile'}</a>
+                  <a>{user ? user.firstname : 'Profile'}</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <a onClick={handleLogout}>Logout</a>
                 </li>
               </ul>
             </div>

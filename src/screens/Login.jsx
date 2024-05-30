@@ -1,59 +1,63 @@
-import React, { useEffect, useState } from "react";
-import { Icon } from "@iconify-icon/react";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../store/userReducer';
 
-function Navbar() {
-  const [user, setUser] = useState(null);
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    setUser(storedUser);
-  }, []);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          
 
-  return (
-    <div className="flex bg-gray-800 px-4 justify-between ml-64">
-      <div className="flex items-center text-xl"></div>
+            const result =  dispatch(loginUser({ email, password }));
+            if (result.payload) {
+                setEmail('');
+                setPassword('');
+                navigate('/dashboard');  // or any route you want to navigate to after login
+            } else {
+                setError('Invalid credentials');
+            }
+        } catch (err) {
+            setError('Invalid credentials');
+        }
+    };
 
-      <div className="bg-white mt-4 mb-4 rounded-lg">
-        <div className="flex md:w-64 items-center justify-center">
-          <span></span>
-          <input
-            type="text"
-            placeholder="search anything....."
-            className="w-full px-4 py-1 pl-12 rounded-lg shadow outline-none hidden md:block"
-          />
-          <button className="focus:outline-none mt-2 text-white md:text-black bg-white py-1 rounded-lg px-4">
-            <Icon icon="iconoir:search" height={20} />
-          </button>
+    return (
+        <div className="min-h-screen flex items-center justify-center">
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
+                <h2 className="text-2xl mb-4">Login</h2>
+                {error && <p className="text-red-500 mb-4">{error}</p>}
+                <div className="mb-4">
+                    <label className="block text-gray-700">Email</label>
+                    <input
+                        type="email"
+                        className="mt-1 p-2 border w-full"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-gray-700">Password</label>
+                    <input
+                        type="password"
+                        className="mt-1 p-2 border w-full"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
+                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
+                    Login
+                </button>
+            </form>
         </div>
-      </div>
-      <div className="flex items-center gap-x-5">
-        {/** space for notifications icons */}
-        <div>
-          <Icon
-            icon="ion:notifications-outline"
-            height={30}
-            className="text-white"
-          />
-        </div>
+    );
+};
 
-        <div className="relative">
-          <button className="text-white group">
-            <Icon icon="ion:person-sharp" height={35} />
-            <div className="z-10 hidden bg-white absolute rounded-lg shadow w-32 group-focus:block top-full right-0">
-              <ul className="py-2 text-sm text-gray-950 space-y-4">
-                <li>
-                  <a>{user ? user.firstname : 'Profile'}</a>
-                </li>
-                <li>
-                  <a>Logout</a>
-                </li>
-              </ul>
-            </div>
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default Navbar;
+export default Login;
