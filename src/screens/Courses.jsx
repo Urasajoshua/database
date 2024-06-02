@@ -1,34 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import DataTable from 'react-data-table-component';
 import axios from 'axios';
+import 'tailwindcss/tailwind.css';
+import { useNavigate } from 'react-router-dom';
 
 function Courses() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const columns = [
-    {
-      name: "S/N",
-      selector: (row, index) => index + 1,
-      sortable: true,
-    },
-    {
-      name: "Course Name",
-      selector: (row) => row.name,
-      sortable: true,
-    },
-    {
-      name: "Department Name",
-      selector: (row) => row.department.name,
-      sortable: true,
-    },
-    {
-      name: "Year",
-      selector: (row) => row.year,
-      sortable: true,
-    },
-  ];
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -45,17 +24,28 @@ function Courses() {
     fetchCourses();
   }, []);
 
+  const handleCourseClick = (courseId) => {
+    console.log(courseId);
+    navigate(`/${courseId}/students`);
+  };
+
   return (
-    <div className="ml-64">
-      <div>
-        {error && <p>{error}</p>}
-        <DataTable
-          columns={columns}
-          data={data}
-          fixedHeader
-          pagination
-          progressPending={loading}
-        />
+    <div className="ml-64 p-4">
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      <div className="flex flex-wrap gap-4">
+        {data.map((course, index) => (
+          
+          <div
+            key={index}
+            className="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer"
+            onClick={() => handleCourseClick(course.id)}
+          >
+            <h3 className="text-xl font-semibold mb-2">{course.name}</h3>
+            <p className="text-gray-700"><strong>Department:</strong> {course.department.name}</p>
+            <p className="text-gray-700"><strong>Year:</strong> {course.year}</p>
+          </div>
+        ))}
       </div>
     </div>
   );

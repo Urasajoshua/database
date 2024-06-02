@@ -31,7 +31,7 @@ function AppLayout() {
       )}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/student" element={<Students />} />
+        <Route path="/:courseId/students" element={<Students />} />
         <Route path="/supervisors" element={<Supervisors />} />
         <Route path="/dissertations" element={<Dissertation />} />
         <Route path="/settings" element={<Settings />} />
