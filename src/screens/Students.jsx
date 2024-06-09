@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+const fetchStudents = async ({ queryKey }) => {
+  const [_key, { courseId, page }] = queryKey;
+  const response = await axios.get(`http://127.0.0.1:8000/auth/courses/${courseId}/students?page=${page}`);
+  return response.data;
+};
 
 function Students() {
   const { courseId } = useParams();
-  const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    const fetchStudents = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(`http://127.0.0.1:8000/auth/courses/${courseId}/students`);
-        setStudents(response.data);
-      } catch (error) {
-        setError('Failed to fetch students');
-      }
-      setLoading(false);
-    };
+  const {
+    data: students,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ['students', { courseId, page }],
+    queryFn: fetchStudents,
+    keepPreviousData: true,
+  });
 
-    fetchStudents();
-  }, [courseId]);
-
-  const filteredStudents = students.filter((student) => {
+  const filteredStudents = students?.filter((student) => {
     const fullName = `${student.firstname} ${student.surname}`.toLowerCase();
     return fullName.includes(searchTerm.toLowerCase());
   });
@@ -35,8 +36,8 @@ function Students() {
 
   return (
     <div className="ml-64 p-4">
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>{error.message}</p>}
       <div>
         <h2 className="text-xl font-semibold mb-4">List of Students</h2>
         <input
@@ -57,7 +58,7 @@ function Students() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {filteredStudents.map((student, index) => (
+            {filteredStudents?.map((student, index) => (
               <tr key={index}>
                 <td className="px-6 py-4 whitespace-nowrap">{student.firstname} {student.surname}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{student.email}</td>
@@ -68,6 +69,23 @@ function Students() {
             ))}
           </tbody>
         </table>
+        <div className="flex justify-between mt-4">
+          <button
+            onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
+            disabled={page === 1}
+            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          >
+            Previous
+          </button>
+          <span>Page {page}</span>
+          <button
+            onClick={() => setPage((prevPage) => prevPage + 1)}
+            disabled={!students || students.length === 0}
+            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -17,12 +17,16 @@ import Courses from "./screens/Courses";
 import Signup from "./screens/Signup";
 import {Provider} from 'react-redux'
 import store from "./store/store";
+import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
+
+const queryClient = new QueryClient();
 
 function AppLayout() {
   const location = useLocation();
 
   return (
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
       {location.pathname !== "/login" && (
         <div className="flex">
           <Sidebar />
@@ -43,12 +47,15 @@ function AppLayout() {
         
       </Routes>
     </Provider>
+    </QueryClientProvider>
+    
   );
 }
 
 function App() {
   return (
-    <Provider store={store}>
+   <QueryClientProvider client={queryClient}>
+     <Provider store={store}>
        <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -59,6 +66,7 @@ function App() {
       </Routes>
     </Router>
     </Provider>
+   </QueryClientProvider>
    
   );
 }

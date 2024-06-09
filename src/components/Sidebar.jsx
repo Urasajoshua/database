@@ -24,16 +24,8 @@ function Sidebar() {
                     Courses
                 </a>
             </li>
-            <li className='mb-2 rounded hover:bg-blue-500 hover:shadow py-2'>
-                <a href='/student' className='px-3'>
-                    Students
-                </a>
-            </li>
-            <li className='mb-2 rounded hover:bg-blue-500 hover:shadow py-2'>
-                <a href='/supervisors' className='px-3'>
-                    Supervisors
-                </a>
-            </li>
+           
+         
             <li className='mb-2 rounded hover:bg-blue-500 hover:shadow py-2'>
                 <a href='/dissertations' className='px-3'>
                     Dissertations

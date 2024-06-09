@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../store/userReducer';
@@ -14,13 +13,11 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          
-
-            const result =  dispatch(loginUser({ email, password }));
-            if (result.payload) {
+            const resultAction = await dispatch(loginUser({ email, password }));
+            if (loginUser.fulfilled.match(resultAction)) {
                 setEmail('');
                 setPassword('');
-                navigate('/dashboard');  // or any route you want to navigate to after login
+                navigate('/dashboard'); // or any route you want to navigate to after login
             } else {
                 setError('Invalid credentials');
             }

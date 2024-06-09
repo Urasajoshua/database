@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify-icon/react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -14,11 +16,11 @@ function Navbar() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     setUser(null);
-    // Optionally navigate to login page or home page
+    navigate('/login')
   };
 
   return (
-    <div className="flex bg-gray-800 px-4 justify-between ml-64">
+    <div className="flex bg-blue-950 px-4 justify-between ml-64">
       <div className="flex items-center text-xl"></div>
 
       <div className="bg-white mt-4 mb-4 rounded-lg">

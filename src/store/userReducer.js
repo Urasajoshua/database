@@ -10,6 +10,7 @@ export const loginUser = createAsyncThunk('user/login', async ({ email, password
         localStorage.setItem('refresh_token', data.refresh);
         return data.user;
     } catch (error) {
+        console.error('Login error:', error.response.data); // Debugging log
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });

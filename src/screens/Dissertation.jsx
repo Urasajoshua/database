@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 function Dissertation() {
   const [data, setData] = useState([]);
@@ -8,6 +9,8 @@ function Dissertation() {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
   const [comment, setComment] = useState('');
+
+  const user = useSelector((state) => state.user.user);
 
   const fetchDissertations = async () => {
     setLoading(true);
@@ -139,7 +142,7 @@ function Dissertation() {
     {
       name: "File",
       selector: (row) => row.file,
-      cell: (row) => row.file ? <a href={row.file} target="_blank" rel="noopener noreferrer">View File</a> : "No File",
+      cell: (row) => row.file ? <a href={row.file} target="_blank" rel="noopener noreferrer">View Dissertation</a> : "No File",
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
@@ -152,7 +155,7 @@ function Dissertation() {
     },
     {
       name: "Comments",
-      cell: (row) => <CommentInput id={row.id} />,
+      cell: (row) => (user && (user.role !== 'STUDENT' && user.role !== 'ADMIN')) ? <CommentInput id={row.id} /> : null,
       ignoreRowClick: true,
       allowOverflow: true,
     },
