@@ -18,6 +18,7 @@ import Signup from "./screens/Signup";
 import {Provider} from 'react-redux'
 import store from "./store/store";
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
+import MyStudents from "./screens/MyStudents";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ function AppLayout() {
         <Route path="/addStudent" element={<StudentForm/>}/>
         <Route path="/addDissertation" element={<DissertationForm/>}/>
         <Route path="/addSupervisors" element={<SupervisorForm/>}/>
+        <Route path="/students" element={<MyStudents/>} />
         
       </Routes>
     </Provider>

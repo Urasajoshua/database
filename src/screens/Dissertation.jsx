@@ -8,7 +8,6 @@ function Dissertation() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState('');
-  const [comment, setComment] = useState('');
 
   const user = useSelector((state) => state.user.user);
 
@@ -33,20 +32,6 @@ function Dissertation() {
       fetchDissertations(); // Refresh data after updating
     } catch (error) {
       setError('Failed to update status');
-    }
-  };
-
-  const handleCommentChange = (e) => {
-    setComment(e.target.value);
-  };
-
-  const handleCommentSubmit = async (id) => {
-    try {
-      await axios.post(`http://127.0.0.1:8000/api/dissertations/${id}/comments/`, { comment });
-      fetchDissertations(); // Refresh data after submitting comment
-      setComment(''); // Clear comment input
-    } catch (error) {
-      setError('Failed to submit comment');
     }
   };
 
@@ -90,24 +75,6 @@ function Dissertation() {
     );
   };
 
-  const CommentInput = ({ id }) => (
-    <div className="flex items-center mt-2 w-40">
-      <input
-        type="text"
-        placeholder="Add comment..."
-        value={comment}
-        onChange={handleCommentChange}
-        className="px-4 py-2 border rounded mr-2"
-      />
-      <button
-        onClick={() => handleCommentSubmit(id)}
-        className="bg-blue-500 text-white px-2 py-2 rounded hover:bg-blue-600"
-      >
-        Submit
-      </button>
-    </div>
-  );
-
   const columns = [
     {
       name: "S/N",
@@ -124,16 +91,8 @@ function Dissertation() {
       selector: (row) => row.student.surname,
       sortable: true,
     },
-    {
-      name: "Registration Number",
-      selector: (row) => row.student.regno,
-      sortable: true,
-    },
-    {
-      name: "Course",
-      selector: (row) => row.student.course,
-      sortable: true,
-    },
+   
+ 
     {
       name: "Dissertation Title",
       selector: (row) => row.title,
@@ -142,45 +101,59 @@ function Dissertation() {
     {
       name: "File",
       selector: (row) => row.file,
-      cell: (row) => row.file ? <a href={row.file} target="_blank" rel="noopener noreferrer">View Dissertation</a> : "No File",
+      cell: (row) => row.file ? <a href={row.file} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">View Dissertation</a> : "No File",
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
     },
-    {
-      name: "Status",
-      selector: (row) => row.status,
-      cell: (row) => <StatusDropdown id={row.id} currentStatus={row.status} />,
-      sortable: true,
-    },
-    {
-      name: "Comments",
-      cell: (row) => (user && (user.role !== 'STUDENT' && user.role !== 'ADMIN')) ? <CommentInput id={row.id} /> : null,
-      ignoreRowClick: true,
-      allowOverflow: true,
-    },
+   
   ];
 
   return (
-    <div className="ml-64">
-      <div className="flex items-center mb-4">
-        <input
-          type="text"
-          placeholder="Search Dissertation Title..."
-          value={search}
-          onChange={handleSearch}
-          className="px-4 py-2 border rounded"
-        />
-      </div>
-      <div>
-        {error && <p>{error}</p>}
-        <DataTable
-          columns={columns}
-          data={filteredData}
-          fixedHeader
-          pagination
-          progressPending={loading}
-        />
+    <div className="ml-64 p-6 bg-gray-100 min-h-screen">
+      <div className="bg-white p-4 rounded-lg shadow-md">
+        <div className="flex items-center mb-4">
+          <input
+            type="text"
+            placeholder="Search Dissertation Title..."
+            value={search}
+            onChange={handleSearch}
+            className="px-4 py-2 border rounded w-full"
+          />
+        </div>
+        <div>
+          {error && <p className="text-red-500">{error}</p>}
+          <DataTable
+            columns={columns}
+            data={filteredData}
+            fixedHeader
+            pagination
+            progressPending={loading}
+            className="shadow-lg"
+            highlightOnHover
+            customStyles={{
+              header: {
+                style: {
+                  fontSize: '16px',
+                  fontWeight: 'bold',
+                  color: 'rgba(0, 0, 0, 0.87)',
+                },
+              },
+              headRow: {
+                style: {
+                  backgroundColor: '#f3f4f6',
+                },
+              },
+              rows: {
+                highlightOnHoverStyle: {
+                  backgroundColor: '#f3f4f6',
+                  borderBottomColor: '#FFFFFF',
+                  outline: '1px solid #FFFFFF',
+                },
+              },
+            }}
+          />
+        </div>
       </div>
     </div>
   );

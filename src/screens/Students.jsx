@@ -35,53 +35,54 @@ function Students() {
   };
 
   return (
-    <div className="ml-64 p-4">
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>{error.message}</p>}
+    <div className="ml-64 p-6 bg-gray-100 min-h-screen">
+      {isLoading && <p className="text-blue-500">Loading...</p>}
+      {isError && <p className="text-red-500">{error.message}</p>}
       <div>
-        <h2 className="text-xl font-semibold mb-4">List of Students</h2>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={handleSearchChange}
-          placeholder="Search by name..."
-          className="border border-gray-300 rounded-md px-3 py-2 mb-4"
-        />
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reg. Number</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dissertation Title</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {filteredStudents?.map((student, index) => (
-              <tr key={index}>
-                <td className="px-6 py-4 whitespace-nowrap">{student.firstname} {student.surname}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.RegNo}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.course}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.dissertations[0]?.title}</td>
+        <div className="flex justify-center mb-6">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search by name..."
+            className="border border-gray-300 rounded-lg px-12 py-2 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 focus:outline-none focus:border-blue-500"
+          />
+        </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Firstname</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lastname</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reg. Number</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dissertation Title</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="flex justify-between mt-4">
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {filteredStudents?.map((student, index) => (
+                <tr key={index} className="hover:bg-gray-100">
+                  <td className="px-6 py-4 whitespace-nowrap">{student.firstname}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{student.surname}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{student.RegNo}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{student.dissertations[0]?.title}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="flex justify-between items-center mt-6">
           <button
             onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
             disabled={page === 1}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50"
           >
             Previous
           </button>
-          <span>Page {page}</span>
+          <span className="text-gray-700">Page {page}</span>
           <button
             onClick={() => setPage((prevPage) => prevPage + 1)}
             disabled={!students || students.length === 0}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
+            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50"
           >
             Next
           </button>

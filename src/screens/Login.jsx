@@ -17,7 +17,7 @@ const Login = () => {
             if (loginUser.fulfilled.match(resultAction)) {
                 setEmail('');
                 setPassword('');
-                navigate('/dashboard'); // or any route you want to navigate to after login
+                navigate('/'); // Navigate to the home page after successful login
             } else {
                 setError('Invalid credentials');
             }
@@ -27,31 +27,45 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-sm">
-                <h2 className="text-2xl mb-4">Login</h2>
-                {error && <p className="text-red-500 mb-4">{error}</p>}
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-sm w-full">
+                <h2 className="text-2xl mb-6 text-center">Login</h2>
+                {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
                 <div className="mb-4">
-                    <label className="block text-gray-700">Email</label>
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                        Email
+                    </label>
                     <input
+                        id="email"
                         type="email"
-                        className="mt-1 p-2 border w-full"
+                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
                     />
                 </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700">Password</label>
+                <div className="mb-6">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                        Password
+                    </label>
                     <input
+                        id="password"
                         type="password"
-                        className="mt-1 p-2 border w-full"
+                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
                     />
                 </div>
-                <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">
-                    Login
-                </button>
+                <div className="flex items-center justify-between">
+                    <button
+                        type="submit"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    >
+                        Login
+                    </button>
+                   
+                </div>
             </form>
         </div>
     );

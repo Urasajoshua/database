@@ -30,20 +30,21 @@ function Courses() {
   };
 
   return (
-    <div className="ml-64 p-4">
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      <div className="flex flex-wrap gap-4">
+    <div className="ml-64 p-6 bg-gray-100 min-h-screen">
+      <div className="flex justify-between items-center mb-6">
+        {loading && <p className="text-blue-500">Loading...</p>}
+      </div>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {data.map((course, index) => (
-          
           <div
             key={index}
-            className="bg-white border border-gray-300 rounded-lg shadow-md p-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 cursor-pointer"
+            className="bg-white rounded-lg shadow-lg p-6 cursor-pointer transition-transform transform hover:scale-105"
             onClick={() => handleCourseClick(course.id)}
           >
-            <h3 className="text-xl font-semibold mb-2">{course.name}</h3>
-            <p className="text-gray-700"><strong>Department:</strong> {course.department.name}</p>
-            <p className="text-gray-700"><strong>Year:</strong> {course.year}</p>
+            <h3 className="text-2xl font-semibold mb-2 text-gray-800">{course.name}</h3>
+            <p className="text-gray-600 mb-1"><strong>Department:</strong> {course.department.name}</p>
+            <p className="text-gray-600"><strong>Year:</strong> {course.year}</p>
           </div>
         ))}
       </div>
