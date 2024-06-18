@@ -13,6 +13,7 @@ function MyStudents() {
         // Fetch students supervised by the logged-in supervisor
         axios.get(`http://127.0.0.1:8000/auth/supervisor/${user.id}/students/`)
             .then(response => {
+                console.log('Students Data:', response.data); // Log the entire response data
                 setStudents(response.data);
                 setFilteredStudents(response.data); // Initialize filtered students with all students
             })
@@ -21,24 +22,25 @@ function MyStudents() {
             });
     }, []);
 
-const updateDissertationStatus = (dissertationId, newStatus) => {
-    axios.patch(`http://127.0.0.1:8000/auth/dissertations/${dissertationId}/update_status/`, { status: newStatus })
-        .then(response => {
-            // Update students state with the updated dissertation
-            const updatedStudents = students.map(student => ({
-                ...student,
-                dissertations: student.dissertations.map(dissertation =>
-                    dissertation.id === response.data.id ? response.data : dissertation
-                )
-            }));
-            setStudents(updatedStudents);
-            setFilteredStudents(updatedStudents); // Optionally update filtered students if needed
-        })
-        .catch(error => {
-            console.error('Error updating dissertation status:', error);
-        });
-};
-
+    const updateDissertationStatus = (dissertationId, newStatus) => {
+        axios.patch(`http://127.0.0.1:8000/dissertations/${6}/update_status/`, { status: newStatus })
+            .then(response => {
+                // Update students state with the updated dissertation
+                const updatedStudents = students.map(student => ({
+                    ...student,
+                    dissertations: student.dissertations.map(dissertation =>
+                        dissertation.id === response.data.id ? response.data : dissertation
+                    )
+                }));
+                setStudents(updatedStudents);
+                setFilteredStudents(updatedStudents); // Optionally update filtered students if needed
+            })
+            .catch(error => {
+                console.error('Error updating dissertation status:', error);
+            });
+    };
+    
+    
 
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
@@ -79,7 +81,7 @@ const updateDissertationStatus = (dissertationId, newStatus) => {
                         <tbody className='text-gray-600 text-sm font-light'>
                             {filteredStudents.map(student => (
                                 student.dissertations.map(dissertation => (
-                                    <tr key={dissertation.title} className='border-b border-gray-200 hover:bg-gray-100'>
+                                    <tr key={dissertation.id} className='border-b border-gray-200 hover:bg-gray-100'>
                                         <td className='py-3 px-6 text-left whitespace-nowrap'>{student.firstname} {student.surname}</td>
                                         <td className='py-3 px-6 text-left'>{student.RegNo}</td>
                                         <td className='py-3 px-6 text-left'>{student.email}</td>
@@ -87,7 +89,15 @@ const updateDissertationStatus = (dissertationId, newStatus) => {
                                         <td className='py-3 px-6 text-left'>{dissertation.status}</td>
                                         <td className='py-3 px-6 text-left'>
                                             {dissertation.file ? (
-                                                <a href={dissertation.file} target='_blank' rel='noopener noreferrer' className='text-blue-500 hover:underline'>View File</a>
+                                                <a
+                                                    href={`http://127.0.0.1:8000${dissertation.file}`} // Ensure correct URL
+                                                    target='_blank'
+                                                    rel='noopener noreferrer'
+                                                    className='text-blue-500 hover:underline'
+                                                    onClick={() => console.log('File URL:', `http://127.0.0.1:8000${dissertation.file}`)}
+                                                >
+                                                    View File
+                                                </a>
                                             ) : (
                                                 <span>No file uploaded</span>
                                             )}

@@ -39,9 +39,10 @@ const SupervisorForm = () => {
         try {
             // Set the default password as the uppercase surname
             const defaultPassword = formData.surname.toUpperCase();
-            await axios.post('http://localhost:8000/api/users/', { ...formData, password: defaultPassword,role:SUPERVISOR });
+            await axios.post('http://localhost:8000/api/users/', { ...formData, password: defaultPassword, role: 'SUPERVISOR' });
             alert('Supervisor added successfully');
             setFormData({
+                email: '',
                 RegNo: '',
                 password: '',
                 role: 'SUPERVISOR',
@@ -61,78 +62,81 @@ const SupervisorForm = () => {
         }
     };
 
-    console.log(errors);
-
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-2xl">
-            <h2 className="text-3xl font-semibold text-center mb-6">Add Supervisor</h2>
-            {errors.global && <div className="text-red-500 mb-4 text-center">{errors.global}</div>}
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                    <label className="block text-gray-700 font-medium mb-1">Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
-                </div>
-                <div>
-                    <label className="block text-gray-700 font-medium mb-1">Registration Number:</label>
-                    <input
-                        type="text"
-                        name="RegNo"
-                        value={formData.RegNo}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.RegNo && <span className="text-red-500 text-sm">{errors.RegNo}</span>}
-                </div>
-                <div>
-                    <label className="block text-gray-700 font-medium mb-1">Firstname:</label>
-                    <input
-                        type="text"
-                        name="firstname"
-                        value={formData.firstname}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.firstname && <span className="text-red-500 text-sm">{errors.firstname}</span>}
-                </div>
-                <div>
-                    <label className="block text-gray-700 font-medium mb-1">Lastname:</label>
-                    <input
-                        type="text"
-                        name="surname"
-                        value={formData.surname}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.surname && <span className="text-red-500 text-sm">{errors.surname}</span>}
-                </div>
-                <div>
-                    <label className="block text-gray-700 font-medium mb-1">Student:</label>
-                    <select
-                        name="student"
-                        value={formData.student}
-                        onChange={handleChange}
-                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        <div className="flex justify-center items-center min-h-screen bg-gray-50">
+            <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+                <h2 className="text-2xl font-bold text-center mb-6">Add Supervisor</h2>
+                {errors.global && <div className="text-red-500 mb-4 text-center">{errors.global}</div>}
+                <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="relative">
+                        <label className="block text-gray-700 font-medium mb-1">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        />
+                        {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
+                    </div>
+                    <div className="relative">
+                        <label className="block text-gray-700 font-medium mb-1">Registration Number</label>
+                        <input
+                            type="text"
+                            name="RegNo"
+                            value={formData.RegNo}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        />
+                        {errors.RegNo && <span className="text-red-500 text-sm">{errors.RegNo}</span>}
+                    </div>
+                    <div className="relative">
+                        <label className="block text-gray-700 font-medium mb-1">Firstname</label>
+                        <input
+                            type="text"
+                            name="firstname"
+                            value={formData.firstname}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        />
+                        {errors.firstname && <span className="text-red-500 text-sm">{errors.firstname}</span>}
+                    </div>
+                    <div className="relative">
+                        <label className="block text-gray-700 font-medium mb-1">Lastname</label>
+                        <input
+                            type="text"
+                            name="surname"
+                            value={formData.surname}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        />
+                        {errors.surname && <span className="text-red-500 text-sm">{errors.surname}</span>}
+                    </div>
+                    <div className="relative">
+                        <label className="block text-gray-700 font-medium mb-1">Student</label>
+                        <select
+                            name="student"
+                            value={formData.student}
+                            onChange={handleChange}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+                        >
+                            <option value="">Select Student</option>
+                            {students.map((student) => (
+                                <option key={student.id} value={student.id}>
+                                    {student.firstname} {student.surname}
+                                </option>
+                            ))}
+                        </select>
+                        {errors.student && <span className="text-red-500 text-sm">{errors.student}</span>}
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                     >
-                        <option value="">Select Student</option>
-                        {students.map((student) => (
-                            <option key={student.id} value={student.id}>
-                                {student.firstname} {student.surname}
-                            </option>
-                        ))}
-                    </select>
-                    {errors.student && <span className="text-red-500 text-sm">{errors.student}</span>}
-                </div>
-                <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-200">
-                    Add Supervisor
-                </button>
-            </form>
+                        Add Supervisor
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

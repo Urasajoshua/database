@@ -52,8 +52,8 @@ function Students() {
           <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
             <thead className="bg-gray-50">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Firstname</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lastname</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reg. Number</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dissertation Title</th>
               </tr>
@@ -61,8 +61,8 @@ function Students() {
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredStudents?.map((student, index) => (
                 <tr key={index} className="hover:bg-gray-100">
-                  <td className="px-6 py-4 whitespace-nowrap">{student.firstname}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{student.surname}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{student.firstname} {student.surname}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{student.email}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{student.RegNo}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{student.dissertations[0]?.title}</td>
                 </tr>

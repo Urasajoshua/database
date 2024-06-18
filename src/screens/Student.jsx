@@ -43,6 +43,7 @@ const StudentForm = () => {
             await axios.post('http://localhost:8000/api/users/', { ...formData, password: defaultPassword,role:'STUDENT' });
             alert('Student added successfully');
             setFormData({
+                email:'',
                 RegNo: '',
                 password: '',
                 role: 'STUDENT',
@@ -63,9 +64,21 @@ const StudentForm = () => {
 
     return (
         <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-2xl">
-            <h2 className="text-3xl font-semibold text-center mb-6">Add Student</h2>
+           
             {errors.global && <div className="text-red-500 mb-4 text-center">{errors.global}</div>}
             <form onSubmit={handleSubmit} className="space-y-4">
+
+            <div>
+                    <label className="block text-gray-700 font-medium mb-1">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    {errors.RegNo && <span className="text-red-500 text-sm">{errors.email}</span>}
+                </div>
                
                 <div>
                     <label className="block text-gray-700 font-medium mb-1">Registration Number:</label>
