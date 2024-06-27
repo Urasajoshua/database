@@ -27,6 +27,10 @@ function Home() {
     navigate('/departments');
   };
 
+  const handleNavigateToDissertations = () => {
+    navigate('/dissertations');
+  };
+
   return (
     <div className='ml-64 bg-gray-100 min-h-screen'>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mx-10 py-10">
@@ -41,10 +45,10 @@ function Home() {
           className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105"
           onClick={handleNavigateToCourses}
         >
-          <h3 className="text-xl font-semibold mb-2">Courses</h3>
+          <h3 className="text-xl font-semibold mb-2">Program</h3>
           <p className="text-4xl font-bold text-green-600 hover:text-green-700">{data.courses}</p>
         </div>
-        <div className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105">
+        <div className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105" onClick={handleNavigateToDissertations}>
           <h3 className="text-xl font-semibold mb-2">Dissertations</h3>
           <p className="text-4xl font-bold text-purple-600 hover:text-purple-700">{data.dissertations}</p>
         </div>

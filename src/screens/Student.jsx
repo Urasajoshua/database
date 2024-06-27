@@ -116,14 +116,14 @@ const StudentForm = () => {
                     {errors.surname && <span className="text-red-500 text-sm">{errors.surname}</span>}
                 </div>
                 <div>
-                    <label className="block text-gray-700 font-medium mb-1">Course:</label>
+                    <label className="block text-gray-700 font-medium mb-1">Program:</label>
                     <select
                         name="course"
                         value={formData.course}
                         onChange={handleChange}
                         className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                        <option value="">Select Course</option>
+                        <option value="">Select Program</option>
                         {courses.map((course) => (
                             <option key={course.id} value={course.id}>
                                 {course.name}

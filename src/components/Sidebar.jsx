@@ -32,7 +32,7 @@ function Sidebar() {
                 </li>
                 <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>
                     <a href='/courses' className='block px-3'>
-                        Courses
+                        Program
                     </a>
                 </li>
                 <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>

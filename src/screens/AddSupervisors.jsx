@@ -65,7 +65,6 @@ const SupervisorForm = () => {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-50">
             <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-                <h2 className="text-2xl font-bold text-center mb-6">Add Supervisor</h2>
                 {errors.global && <div className="text-red-500 mb-4 text-center">{errors.global}</div>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="relative">
@@ -80,7 +79,7 @@ const SupervisorForm = () => {
                         {errors.email && <span className="text-red-500 text-sm">{errors.email}</span>}
                     </div>
                     <div className="relative">
-                        <label className="block text-gray-700 font-medium mb-1">Registration Number</label>
+                        <label className="block text-gray-700 font-medium mb-1">Id Number</label>
                         <input
                             type="text"
                             name="RegNo"

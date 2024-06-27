@@ -25,7 +25,6 @@ function Courses() {
   }, []);
 
   const handleCourseClick = (courseId) => {
-    console.log(courseId);
     navigate(`/${courseId}/students`);
   };
 
