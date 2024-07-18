@@ -45,7 +45,7 @@ const Signup = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded shadow-md">
+        <div className="max-w-md mx-auto mt-8 p-6 bg-orange-900 rounded shadow-md">
             <h1>Aru Database online</h1>
             <h2 className="text-2xl mb-4">Signup</h2>
             {successMessage && <div className="text-green-500 mb-4">{successMessage}</div>}

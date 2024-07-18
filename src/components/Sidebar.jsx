@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 function Sidebar() {
     const [userRole, setUserRole] = useState('');
@@ -11,48 +12,65 @@ function Sidebar() {
         }
     }, []);
 
-
-
     return (
         <div className='w-64 bg-gray-900 fixed h-screen px-4 py-6'>
-            <div className='my-4 mb-6'>
-                <h1 className='text-white text-2xl font-bold'>Database Management</h1>
+            <div className='my-4 mb-6 flex items-center'>
+                <img src='/1.png' alt='Logo' className='h-8 mr-1' /> {/* Adjust the path to your logo */}
+                <h1 className='text-white text-xl font-bold'>Database Management</h1>
             </div>
             <hr className='border-gray-700' />
             <ul className='mt-6 text-white font-semibold'>
-                <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>
+                <motion.li
+                    className='mb-3 rounded py-3'
+                    whileHover={{ scale: 1.05, backgroundColor: '#2563eb', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}
+                >
                     <a href='/' className='block px-3'>
                         Dashboard
                     </a>
-                </li>
-                <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>
+                </motion.li>
+                <motion.li
+                    className='mb-3 rounded py-3'
+                    whileHover={{ scale: 1.05, backgroundColor: '#2563eb', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}
+                >
                     <a href='/departments' className='block px-3'>
                         Departments
                     </a>
-                </li>
-                <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>
+                </motion.li>
+                <motion.li
+                    className='mb-3 rounded py-3'
+                    whileHover={{ scale: 1.05, backgroundColor: '#2563eb', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}
+                >
                     <a href='/courses' className='block px-3'>
                         Program
                     </a>
-                </li>
-                <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>
+                </motion.li>
+                <motion.li
+                    className='mb-3 rounded py-3'
+                    whileHover={{ scale: 1.05, backgroundColor: '#2563eb', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}
+                >
                     <a href='/dissertations' className='block px-3'>
                         Dissertations
                     </a>
-                </li>
+                </motion.li>
                 {userRole !== 'SUPERVISOR' && (
-                <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>
-                    <a href='/settings' className='block px-3'>
-                        Settings
-                    </a>
-                </li>)}
-                
+                    <motion.li
+                        className='mb-3 rounded py-3'
+                        whileHover={{ scale: 1.05, backgroundColor: '#2563eb', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}
+                    >
+                        <a href='/settings' className='block px-3'>
+                            Settings
+                        </a>
+                    </motion.li>
+                )}
                 {userRole === 'SUPERVISOR' && (
-                    <li className='mb-3 rounded hover:bg-blue-600 hover:shadow-lg py-3 transition duration-200 ease-in-out'>
+                    <motion.li
+                        className='mb-3 rounded py-3'
+                        whileHover={{ scale: 1.05, backgroundColor: '#2563eb', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}
+                    >
                         <a href='/students' className='block px-3'>
                             My Students
                         </a>
-                    </li>
+                    </motion.li>
                 )}
             </ul>
         </div>

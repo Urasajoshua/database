@@ -35,7 +35,7 @@ function Students() {
   };
 
   return (
-    <div className="ml-64 p-6 bg-gray-100 min-h-screen">
+    <div className="ml-64 p-6 bg-orange-900 min-h-screen">
       {isLoading && <p className="text-blue-500">Loading...</p>}
       {isError && <p className="text-red-500">{error.message}</p>}
       <div>

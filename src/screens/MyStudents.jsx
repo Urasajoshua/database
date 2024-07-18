@@ -2,44 +2,44 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function MyStudents() {
-    const [students, setStudents] = useState([]);
-    const [filteredStudents, setFilteredStudents] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [students, setStudents] = useState([]); // State to store all students
+    const [filteredStudents, setFilteredStudents] = useState([]); // State to store filtered students
+    const [searchTerm, setSearchTerm] = useState(''); // State to store search term
 
     useEffect(() => {
-        // Get the user data from localStorage
-        const user = JSON.parse(localStorage.getItem('user'));
+        // Fetch students on component mount
+        fetchStudents();
+    }, []);
 
-        // Fetch students supervised by the logged-in supervisor
+    const fetchStudents = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
         axios.get(`http://127.0.0.1:8000/auth/supervisor/${user.id}/students/`)
             .then(response => {
-                console.log('Students Data:', response.data); // Log the entire response data
                 setStudents(response.data);
-                setFilteredStudents(response.data); // Initialize filtered students with all students
+                setFilteredStudents(response.data); // Initialize filtered students
             })
             .catch(error => {
                 console.error('Error fetching students:', error);
             });
-    }, []);
+    };
 
     const updateDissertationStatus = (dissertationId, newStatus) => {
-        axios.patch(`http://127.0.0.1:8000/dissertations/${6}/update_status/`, { status: newStatus })
+        axios.patch(`http://127.0.0.1:8000/dissertations/${11}/`, { status: newStatus })
             .then(response => {
-                // Update students state with the updated dissertation
                 const updatedStudents = students.map(student => ({
                     ...student,
                     dissertations: student.dissertations.map(dissertation =>
                         dissertation.id === response.data.id ? response.data : dissertation
                     )
                 }));
+                console.log('resppoo',response);
                 setStudents(updatedStudents);
-                setFilteredStudents(updatedStudents); // Optionally update filtered students if needed
+                setFilteredStudents(updatedStudents); // Update filtered students if needed
             })
             .catch(error => {
-                console.error('Error updating dissertation status:', error);
+                console.error('Error updating dissertation status:', error.response);
             });
     };
-    
     
 
     const handleSearch = (event) => {
@@ -74,8 +74,7 @@ function MyStudents() {
                                 <th className='py-3 px-6 text-left'>Email</th>
                                 <th className='py-3 px-6 text-left'>Dissertation Title</th>
                                 <th className='py-3 px-6 text-left'>Status</th>
-                                <th className='py-3 px-6 text-left'>File</th>
-                                <th className='py-3 px-6 text-center'>Actions</th>
+                                
                             </tr>
                         </thead>
                         <tbody className='text-gray-600 text-sm font-light'>
@@ -86,11 +85,10 @@ function MyStudents() {
                                         <td className='py-3 px-6 text-left'>{student.RegNo}</td>
                                         <td className='py-3 px-6 text-left'>{student.email}</td>
                                         <td className='py-3 px-6 text-left'>{dissertation.title}</td>
-                                        <td className='py-3 px-6 text-left'>{dissertation.status}</td>
                                         <td className='py-3 px-6 text-left'>
                                             {dissertation.file ? (
                                                 <a
-                                                    href={`http://127.0.0.1:8000${dissertation.file}`} // Ensure correct URL
+                                                    href={`http://127.0.0.1:8000${dissertation.file}`}
                                                     target='_blank'
                                                     rel='noopener noreferrer'
                                                     className='text-blue-500 hover:underline'
@@ -102,24 +100,7 @@ function MyStudents() {
                                                 <span>No file uploaded</span>
                                             )}
                                         </td>
-                                        <td className='py-3 px-6 text-center'>
-                                            {dissertation.status !== 'VERIFIED' && (
-                                                <div>
-                                                    <button
-                                                        className='bg-green-500 text-white px-2 py-1 rounded mr-2 hover:bg-green-600'
-                                                        onClick={() => updateDissertationStatus(dissertation.id, 'VERIFIED')}
-                                                    >
-                                                        Approve
-                                                    </button>
-                                                    <button
-                                                        className='bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600'
-                                                        onClick={() => updateDissertationStatus(dissertation.id, 'REJECTED')}
-                                                    >
-                                                        Reject
-                                                    </button>
-                                                </div>
-                                            )}
-                                        </td>
+                                        
                                     </tr>
                                 ))
                             ))}

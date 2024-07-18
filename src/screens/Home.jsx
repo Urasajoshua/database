@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 function Home() {
   const [data, setData] = useState({
@@ -31,35 +32,57 @@ function Home() {
     navigate('/dissertations');
   };
 
+  const handleNavigateToVerified = () => {
+    navigate('/verified');
+  };
+
+  const handleNavigateToUnverified = () => {
+    navigate('/unverified');
+  };
+
   return (
-    <div className='ml-64 bg-gray-100 min-h-screen'>
+    <div className='ml-64 bg-orange-900 min-h-screen'>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mx-10 py-10">
-        <div
-          className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105"
+        <motion.div
+          className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
           onClick={handleNavigateToDepartments}
+          whileHover={{ scale: 1.05 }}
         >
           <h3 className="text-xl font-semibold mb-2">Departments</h3>
           <p className="text-4xl font-bold text-blue-600 hover:text-blue-700">{data.departments}</p>
-        </div>
-        <div
-          className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105"
+        </motion.div>
+        <motion.div
+          className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
           onClick={handleNavigateToCourses}
+          whileHover={{ scale: 1.05 }}
         >
           <h3 className="text-xl font-semibold mb-2">Program</h3>
           <p className="text-4xl font-bold text-green-600 hover:text-green-700">{data.courses}</p>
-        </div>
-        <div className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105" onClick={handleNavigateToDissertations}>
+        </motion.div>
+        <motion.div
+          className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
+          onClick={handleNavigateToDissertations}
+          whileHover={{ scale: 1.05 }}
+        >
           <h3 className="text-xl font-semibold mb-2">Dissertations</h3>
           <p className="text-4xl font-bold text-purple-600 hover:text-purple-700">{data.dissertations}</p>
-        </div>
-        <div className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105">
+        </motion.div>
+        <motion.div
+          className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+          onClick={handleNavigateToVerified}
+        >
           <h3 className="text-xl font-semibold mb-2">Verified Dissertations</h3>
           <p className="text-4xl font-bold text-indigo-600 hover:text-indigo-700">{data.verifiedDissertations}</p>
-        </div>
-        <div className="bg-white shadow-lg rounded-lg p-6 cursor-pointer transition-transform transform hover:scale-105">
+        </motion.div>
+        <motion.div
+          className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
+          whileHover={{ scale: 1.05 }}
+          onClick={handleNavigateToUnverified}
+        >
           <h3 className="text-xl font-semibold mb-2">Unverified Dissertations</h3>
           <p className="text-4xl font-bold text-red-600 hover:text-red-700">{data.unverifiedDissertations}</p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

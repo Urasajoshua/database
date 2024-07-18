@@ -3,7 +3,7 @@ import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-function Dissertation() {
+function UnverifiedDissertations() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,29 +11,20 @@ function Dissertation() {
 
   const user = useSelector((state) => state.user.user);
 
-  const fetchDissertations = async () => {
+  const fetchUnverifiedDissertations = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/dissertations/');
+      const response = await axios.get('http://127.0.0.1:8000/auth/unverified/');
       setData(response.data);
     } catch (error) {
-      setError('Failed to fetch dissertations');
+      setError('Failed to fetch unverified dissertations');
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    fetchDissertations();
+    fetchUnverifiedDissertations();
   }, []);
-
-  const handleStatusChange = async (id, newStatus) => {
-    try {
-      await axios.patch(`http://127.0.0.1:8000/api/dissertations/${id}/`, { status: newStatus });
-      fetchDissertations(); // Refresh data after updating
-    } catch (error) {
-      setError('Failed to update status');
-    }
-  };
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -42,38 +33,6 @@ function Dissertation() {
   const filteredData = data.filter((item) =>
     item.title.toLowerCase().includes(search.toLowerCase())
   );
-
-  const StatusDropdown = ({ id, currentStatus }) => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const statusOptions = ['PENDING', 'APPROVED', 'REJECTED'];
-
-    return (
-      <div className="relative">
-        <button
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-          className="text-blue-500 focus:outline-none"
-        >
-          {currentStatus}
-        </button>
-        {dropdownOpen && (
-          <div className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
-            {statusOptions.map((status) => (
-              <div
-                key={status}
-                onClick={() => {
-                  handleStatusChange(id, status);
-                  setDropdownOpen(false);
-                }}
-                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-              >
-                {status}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  };
 
   const columns = [
     {
@@ -91,8 +50,6 @@ function Dissertation() {
       selector: (row) => row.student.surname,
       sortable: true,
     },
-   
- 
     {
       name: "Dissertation Title",
       selector: (row) => row.title,
@@ -106,7 +63,6 @@ function Dissertation() {
       allowOverflow: true,
       button: true,
     },
-   
   ];
 
   return (
@@ -159,4 +115,4 @@ function Dissertation() {
   );
 }
 
-export default Dissertation;
+export default UnverifiedDissertations;

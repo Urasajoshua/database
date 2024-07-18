@@ -27,11 +27,14 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-sm w-full">
-                <h1 className="text-2xl mb-6 text-center text-blue-500">Database Management System</h1>
-                <h2 className="text-2xl mb-6 text-center">Login</h2>
-                {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500">
+            <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg px-10 pt-10 pb-8 mb-4 max-w-sm w-full">
+                <div className="flex justify-center mb-6">
+                    <img src="/1.png" alt="Logo" className="h-24" /> {/* Adjust the path to your logo */}
+                </div>
+                <h1 className="text-3xl mb-6 text-center text-blue-600 font-bold">Database Management System</h1>
+                <h2 className="text-2xl mb-6 text-center text-gray-700">Login</h2>
+                {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="emailOrRegno">
                         Email or Registration Number
@@ -61,7 +64,7 @@ const Login = () => {
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
                     >
                         Login
                     </button>

@@ -19,6 +19,8 @@ import {Provider} from 'react-redux'
 import store from "./store/store";
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 import MyStudents from "./screens/MyStudents";
+import VerifiedDissertations from "./screens/VerifiedDissertation";
+import UnverifiedDissertations from "./screens/Unverified";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,8 @@ function AppLayout() {
         <Route path="/addDissertation" element={<DissertationForm/>}/>
         <Route path="/addSupervisors" element={<SupervisorForm/>}/>
         <Route path="/students" element={<MyStudents/>} />
+        <Route path="/verified" element={<VerifiedDissertations/>} />
+        <Route path="/unverified" element={<UnverifiedDissertations/>} />
         
       </Routes>
     </Provider>

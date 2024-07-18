@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 function Departments() {
   const [data, setData] = useState([]);
@@ -42,7 +43,12 @@ function Departments() {
   }, []);
 
   return (
-    <div className="ml-64 p-6 bg-gray-100 min-h-screen">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="ml-64 p-6 bg-orange-900 min-h-screen"
+    >
       <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Departments</h2>
         <div>
@@ -75,10 +81,23 @@ function Departments() {
                 },
               },
             }}
+            paginationComponentOptions={{
+              noRowsPerPage: true,
+            }}
+            customComponents={{
+              Row: ({ data, ...props }) => (
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  {...props}
+                >
+                  {props.children}
+                </motion.div>
+              ),
+            }}
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
