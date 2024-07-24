@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const loginUser = createAsyncThunk('user/login', async ({ email_or_regno, password }, thunkAPI) => {
     try {
-        const response = await axios.post('http://gamerlastborn.pythonanywhere.com/auth/login/', { email_or_regno, password }).catch((error)=>{
+        const response = await axios.post('https://gamerlastborn.pythonanywhere.com/auth/login/', { email_or_regno, password }).catch((error)=>{
             console.log(error.response.data);
         });
         const data = response.data;
