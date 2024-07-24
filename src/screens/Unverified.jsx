@@ -14,7 +14,7 @@ function UnverifiedDissertations() {
   const fetchUnverifiedDissertations = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://gamerlastborn.pythonanywhere.com/auth/unverified/');
+      const response = await axios.get('https://gamerlastborn.pythonanywhere.com/auth/unverified/');
       setData(response.data);
     } catch (error) {
       setError('Failed to fetch unverified dissertations');

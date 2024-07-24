@@ -14,7 +14,7 @@ const SupervisorForm = () => {
     useEffect(() => {
         const fetchSupervisors = async () => {
             try {
-                const response = await axios.get('http://gamerlastborn.pythonanywhere.com/api/users/?role=SUPERVISOR');
+                const response = await axios.get('https://gamerlastborn.pythonanywhere.com/api/users/?role=SUPERVISOR');
                 setSupervisors(response.data);
             } catch (error) {
                 console.error('Error fetching supervisors:', error);
@@ -23,7 +23,7 @@ const SupervisorForm = () => {
 
         const fetchStudents = async () => {
             try {
-                const response = await axios.get('http://gamerlastborn.pythonanywhere.com/api/users/?role=STUDENT');
+                const response = await axios.get('https://gamerlastborn.pythonanywhere.com/api/users/?role=STUDENT');
                 setStudents(response.data);
             } catch (error) {
                 console.error('Error fetching students:', error);
@@ -59,7 +59,7 @@ const SupervisorForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://gamerlastborn.pythonanywhere.com/api/assign_students_to_supervisor/', formData).then((resonse)=>{
+            await axios.post('https://gamerlastborn.pythonanywhere.com/api/assign_students_to_supervisor/', formData).then((resonse)=>{
                 console.log('reeee',JSON.stringify(resonse));
             })
             .catch((error) => {

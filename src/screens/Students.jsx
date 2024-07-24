@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const fetchStudents = async ({ queryKey }) => {
   const [_key, { courseId, page }] = queryKey;
-  const response = await axios.get(`http://gamerlastborn.pythonanywhere.com/auth/courses/${courseId}/students?page=${page}`);
+  const response = await axios.get(`https://gamerlastborn.pythonanywhere.com/auth/courses/${courseId}/students?page=${page}`);
   return response.data;
 };
 

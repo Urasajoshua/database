@@ -14,7 +14,7 @@ function Dissertation() {
   const fetchDissertations = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://gamerlastborn.pythonanywhere.com/api/dissertations/');
+      const response = await axios.get('https://gamerlastborn.pythonanywhere.com/api/dissertations/');
       setData(response.data);
     } catch (error) {
       setError('Failed to fetch dissertations');
@@ -28,7 +28,7 @@ function Dissertation() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.patch(`http://gamerlastborn.pythonanywhere.com/api/dissertations/${id}/`, { status: newStatus });
+      await axios.patch(`https://gamerlastborn.pythonanywhere.com/api/dissertations/${id}/`, { status: newStatus });
       fetchDissertations(); // Refresh data after updating
     } catch (error) {
       setError('Failed to update status');

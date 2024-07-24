@@ -18,7 +18,7 @@ const Supervisor = () => {
     const fetchStudents = async () => {
       try {
         const response = await axios.get(
-          "http://gamerlastborn.pythonanywhere.com/api/users/?role=STUDENT"
+          "https://gamerlastborn.pythonanywhere.com/api/users/?role=STUDENT"
         );
         setStudents(response.data);
       } catch (error) {
@@ -41,7 +41,7 @@ const Supervisor = () => {
     try {
       // Set the default password as the uppercase surname
       const defaultPassword = formData.surname.toUpperCase();
-      await axios.post("http://gamerlastborn.pythonanywhere.com/api/users/", {
+      await axios.post("https://gamerlastborn.pythonanywhere.com/api/users/", {
         ...formData,
         password: defaultPassword,
         role: "SUPERVISOR",
