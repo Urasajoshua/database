@@ -14,7 +14,7 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://gamerlastborn.pythonanywhere.com/auth/api/dashboard-data/')
+    fetch('https://gamerlastborn.pythonanywhere.com/auth/api/dashboard-data/')
       .then(response => response.json())
       .then(data => setData(data))
       .catch(error => console.error('Error fetching data:', error));
