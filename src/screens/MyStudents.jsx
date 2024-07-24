@@ -13,7 +13,7 @@ function MyStudents() {
 
     const fetchStudents = () => {
         const user = JSON.parse(localStorage.getItem('user'));
-        axios.get(`http://127.0.0.1:8000/auth/supervisor/${user.id}/students/`)
+        axios.get(`http://gamerlastborn.pythonanywhere.com/auth/supervisor/${user.id}/students/`)
             .then(response => {
                 setStudents(response.data);
                 setFilteredStudents(response.data); // Initialize filtered students
@@ -24,7 +24,7 @@ function MyStudents() {
     };
 
     const updateDissertationStatus = (dissertationId, newStatus) => {
-        axios.patch(`http://127.0.0.1:8000/dissertations/${11}/`, { status: newStatus })
+        axios.patch(`http://gamerlastborn.pythonanywhere.com/dissertations/${11}/`, { status: newStatus })
             .then(response => {
                 const updatedStudents = students.map(student => ({
                     ...student,

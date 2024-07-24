@@ -31,7 +31,7 @@ function Departments() {
     const fetchDepartments = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://127.0.0.1:8000/auth/departments/');
+        const response = await axios.get('http://gamerlastborn.pythonanywhere.com/auth/departments/');
         setData(response.data);
       } catch (error) {
         setError('Failed to fetch departments');

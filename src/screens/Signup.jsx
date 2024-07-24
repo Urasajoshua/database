@@ -24,7 +24,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:8000/auth/signup/', formData);
+            await axios.post('http://gamerlastborn.pythonanywhere.com/auth/signup/', formData);
             setSuccessMessage('Signup successful');
             setErrors({});
             formData.RegNo=''

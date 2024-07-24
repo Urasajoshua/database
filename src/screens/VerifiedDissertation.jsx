@@ -14,7 +14,7 @@ function VerifiedDissertations() {
   const fetchVerifiedDissertations = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://127.0.0.1:8000/auth/verified/');
+      const response = await axios.get('http://gamerlastborn.pythonanywhere.com/auth/verified/');
       setData(response.data);
     } catch (error) {
       setError('Failed to fetch verified dissertations');
