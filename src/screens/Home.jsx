@@ -14,11 +14,29 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://gamerlastborn.pythonanywhere.com/auth/api/dashboard-data/')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
+    const checkAuth = () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) {
+        navigate('/login'); // Redirect to login if no user is found
+        return;
+      }
+    };
+
+    checkAuth(); // Check authentication status
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://gamerlastborn.pythonanywhere.com/auth/api/dashboard-data/');
+        if (!response.ok) throw new Error('Network response was not ok.');
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Fetch dashboard data
+  }, [navigate]);
 
   const handleNavigateToCourses = () => {
     navigate('/courses');
@@ -41,8 +59,8 @@ function Home() {
   };
 
   return (
-    <div className='ml-64 bg-orange-900 min-h-screen'>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mx-10 py-10">
+    <div className='md:ml-64 bg-orange-900 min-h-screen'>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mx-4 sm:mx-6 md:mx-10 py-10">
         <motion.div
           className="bg-white shadow-lg rounded-lg p-6 cursor-pointer"
           onClick={handleNavigateToDepartments}

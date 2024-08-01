@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { json } from 'react-router-dom';
 
 const SupervisorForm = () => {
     const [formData, setFormData] = useState({
@@ -59,12 +58,7 @@ const SupervisorForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://gamerlastborn.pythonanywhere.com/api/assign_students_to_supervisor/', formData).then((resonse)=>{
-                console.log('reeee',JSON.stringify(resonse));
-            })
-            .catch((error) => {
-                console.log('errrr', JSON.stringify(error.response.data));
-            });
+            await axios.post('https://gamerlastborn.pythonanywhere.com/api/assign_students_to_supervisor/', formData);
             alert('Students assigned to supervisor successfully');
             setFormData({
                 supervisor: '',
@@ -75,16 +69,15 @@ const SupervisorForm = () => {
             console.error('Error assigning students to supervisor:', error);
             if (error.response && error.response.data) {
                 setErrors(error.response.data);
-                console.log(error.response.data);
             } else {
                 setErrors({ global: 'An error occurred. Please try again later.' });
             }
         }
     };
-    
+
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-50">
-            <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+            <div className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
                 {errors.global && <div className="text-red-500 mb-4 text-center">{errors.global}</div>}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="relative">

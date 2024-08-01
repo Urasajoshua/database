@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function MyStudents() {
-    const [students, setStudents] = useState([]); // State to store all students
-    const [filteredStudents, setFilteredStudents] = useState([]); // State to store filtered students
-    const [searchTerm, setSearchTerm] = useState(''); // State to store search term
+    const [students, setStudents] = useState([]);
+    const [filteredStudents, setFilteredStudents] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
-        // Fetch students on component mount
         fetchStudents();
     }, []);
 
@@ -16,15 +16,16 @@ function MyStudents() {
         axios.get(`https://gamerlastborn.pythonanywhere.com/auth/supervisor/${user.id}/students/`)
             .then(response => {
                 setStudents(response.data);
-                setFilteredStudents(response.data); // Initialize filtered students
+                setFilteredStudents(response.data);
             })
             .catch(error => {
                 console.error('Error fetching students:', error);
+                setError('Failed to fetch students');
             });
     };
 
     const updateDissertationStatus = (dissertationId, newStatus) => {
-        axios.patch(`https://gamerlastborn.pythonanywhere.com/dissertations/${11}/`, { status: newStatus })
+        axios.patch(`https://gamerlastborn.pythonanywhere.com/dissertations/${dissertationId}/`, { status: newStatus })
             .then(response => {
                 const updatedStudents = students.map(student => ({
                     ...student,
@@ -32,15 +33,14 @@ function MyStudents() {
                         dissertation.id === response.data.id ? response.data : dissertation
                     )
                 }));
-                console.log('resppoo',response);
                 setStudents(updatedStudents);
-                setFilteredStudents(updatedStudents); // Update filtered students if needed
+                setFilteredStudents(updatedStudents);
             })
             .catch(error => {
-                console.error('Error updating dissertation status:', error.response);
+                console.error('Error updating dissertation status:', error);
+                setError('Failed to update dissertation status');
             });
     };
-    
 
     const handleSearch = (event) => {
         const searchTerm = event.target.value.toLowerCase();
@@ -53,8 +53,41 @@ function MyStudents() {
         setFilteredStudents(filtered);
     };
 
+    const StatusDropdown = ({ dissertationId, currentStatus }) => {
+        const [dropdownOpen, setDropdownOpen] = useState(false);
+        const statusOptions = ['PENDING', 'APPROVED', 'REJECTED'];
+
+        return (
+            <div className="relative">
+                <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="text-blue-500 focus:outline-none"
+                >
+                    {currentStatus}
+                </button>
+                {dropdownOpen && (
+                    <div className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+                        {statusOptions.map((status) => (
+                            <div
+                                key={status}
+                                onClick={() => {
+                                    updateDissertationStatus(dissertationId, status);
+                                    setDropdownOpen(false);
+                                }}
+                                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                            >
+                                {status}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        );
+    };
+
     return (
-        <div className='ml-64 mr-10'>
+        <div className='p-4'>
+            {error && <p className='text-red-500 mb-4'>{error}</p>}
             <div className='mb-4 py-4'>
                 <input
                     type='text'
@@ -73,8 +106,8 @@ function MyStudents() {
                                 <th className='py-3 px-6 text-left'>Reg No</th>
                                 <th className='py-3 px-6 text-left'>Email</th>
                                 <th className='py-3 px-6 text-left'>Dissertation Title</th>
+                                <th className='py-3 px-6 text-left'>File</th>
                                 <th className='py-3 px-6 text-left'>Status</th>
-                                
                             </tr>
                         </thead>
                         <tbody className='text-gray-600 text-sm font-light'>
@@ -92,7 +125,6 @@ function MyStudents() {
                                                     target='_blank'
                                                     rel='noopener noreferrer'
                                                     className='text-blue-500 hover:underline'
-                                                    onClick={() => console.log('File URL:', `http://127.0.0.1:8000${dissertation.file}`)}
                                                 >
                                                     View File
                                                 </a>
@@ -100,7 +132,9 @@ function MyStudents() {
                                                 <span>No file uploaded</span>
                                             )}
                                         </td>
-                                        
+                                        <td className='py-3 px-6 text-left'>
+                                            <StatusDropdown dissertationId={dissertation.id} currentStatus={dissertation.status} />
+                                        </td>
                                     </tr>
                                 ))
                             ))}

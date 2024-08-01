@@ -34,7 +34,7 @@ function Courses() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="ml-64 p-6 bg-orange-900 min-h-screen"
+      className="md:ml-64 p-6 bg-orange-900 min-h-screen"
     >
       <div className="flex justify-between items-center mb-6">
         {loading && <p className="text-blue-500">Loading...</p>}

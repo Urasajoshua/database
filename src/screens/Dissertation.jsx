@@ -56,7 +56,7 @@ function Dissertation() {
           {currentStatus}
         </button>
         {dropdownOpen && (
-          <div className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
+          <div className="absolute mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
             {statusOptions.map((status) => (
               <div
                 key={status}
@@ -91,8 +91,6 @@ function Dissertation() {
       selector: (row) => row.student.surname,
       sortable: true,
     },
-   
- 
     {
       name: "Dissertation Title",
       selector: (row) => row.title,
@@ -106,11 +104,17 @@ function Dissertation() {
       allowOverflow: true,
       button: true,
     },
-   
+    {
+      name: "Status",
+      cell: (row) => <StatusDropdown id={row.id} currentStatus={row.status} />,
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+    },
   ];
 
   return (
-    <div className="ml-64 p-6 bg-orange-900 min-h-screen">
+    <div className="md:ml-64 p-6 bg-orange-900 min-h-screen">
       <div className="bg-white p-4 rounded-lg shadow-md">
         <div className="flex items-center mb-4">
           <input

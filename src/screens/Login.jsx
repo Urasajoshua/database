@@ -27,13 +27,13 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500">
-            <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg px-10 pt-10 pb-8 mb-4 max-w-sm w-full">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
+            <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg px-6 py-8 mb-4 max-w-sm w-full sm:px-10 sm:py-10 md:max-w-md lg:max-w-lg">
                 <div className="flex justify-center mb-6">
-                    <img src="/1.png" alt="Logo" className="h-24" /> {/* Adjust the path to your logo */}
+                    <img src="/1.png" alt="Logo" className="h-16 sm:h-24" /> {/* Adjust the path to your logo */}
                 </div>
-                <h1 className="text-3xl mb-6 text-center text-blue-600 font-bold">Database Management System</h1>
-                <h2 className="text-2xl mb-6 text-center text-gray-700">Login</h2>
+                <h1 className="text-2xl sm:text-3xl mb-4 sm:mb-6 text-center text-blue-600 font-bold">Database Management System</h1>
+                <h2 className="text-xl sm:text-2xl mb-4 sm:mb-6 text-center text-gray-700">Login</h2>
                 {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="emailOrRegno">
@@ -61,7 +61,7 @@ const Login = () => {
                         placeholder="Enter your password"
                     />
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-center">
                     <button
                         type="submit"
                         className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"

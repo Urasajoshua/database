@@ -47,7 +47,7 @@ function Departments() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="ml-64 p-6 bg-orange-900 min-h-screen"
+      className="md:ml-64 p-4 md:p-6 bg-orange-900 min-h-screen"
     >
       <div className="bg-white p-4 rounded-lg shadow-md">
         <h2 className="text-2xl font-semibold text-gray-800 mb-6">Departments</h2>
