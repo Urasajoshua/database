@@ -21,6 +21,7 @@ import {QueryClient,QueryClientProvider} from '@tanstack/react-query'
 import MyStudents from "./screens/MyStudents";
 import VerifiedDissertations from "./screens/VerifiedDissertation";
 import UnverifiedDissertations from "./screens/Unverified";
+import ForgotPassword from "./screens/ForgotPassword";
 
 const queryClient = new QueryClient();
 
@@ -66,8 +67,10 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
         <Route path="/*" element={<AppLayout />} />
         <Route path="/signup" component={<Signup/>}/>
+        
         
       </Routes>
     </Router>

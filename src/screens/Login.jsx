@@ -26,6 +26,10 @@ const Login = () => {
         }
     };
 
+    const handleForgotPassword = () => {
+        navigate('/forgot-password'); // Redirect to the forgot password page
+    };
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500 px-4 py-6 sm:px-6 sm:py-8 md:px-8 md:py-10">
             <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg px-6 py-8 mb-4 max-w-sm w-full sm:px-10 sm:py-10 md:max-w-md lg:max-w-lg">
@@ -67,6 +71,15 @@ const Login = () => {
                         className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
                     >
                         Login
+                    </button>
+                </div>
+                <div className="flex items-center justify-center mt-4">
+                    <button
+                        type="button"
+                        onClick={handleForgotPassword}
+                        className="text-blue-600 hover:text-blue-800 font-semibold text-sm"
+                    >
+                        Forgot Password?
                     </button>
                 </div>
             </form>
