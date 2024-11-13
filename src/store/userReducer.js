@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const loginUser = createAsyncThunk('user/login', async ({ email_or_regno, password }, thunkAPI) => {
     try {
-        const response = await axios.post('http://64.23.247.7:8000/auth/login/', { email_or_regno, password }).catch((error)=>{
+        const response = await axios.post('http://146.190.1.145:8000/auth/login/', { email_or_regno, password }).catch((error)=>{
             console.log(error.response.data);
         });
         const data = response.data;
