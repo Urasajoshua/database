@@ -22,7 +22,7 @@ const SupervisorForm = () => {
 
         const fetchStudents = async () => {
             try {
-                const response = await axios.get('https://gamerlastborn.pythonanywhere.com/api/users/?role=STUDENT');
+                const response = await axios.get('/api/users/?role=STUDENT');
                 setStudents(response.data);
             } catch (error) {
                 console.error('Error fetching students:', error);
