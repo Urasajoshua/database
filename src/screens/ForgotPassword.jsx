@@ -12,7 +12,7 @@ function ForgotPassword() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://gamerlastborn.pythonanywhere.com/auth/update-password/', {
+            const response = await axios.post('http://64.23.247.7:8000//auth/update-password/', {
                 email,
                 new_password: newPassword,
             });

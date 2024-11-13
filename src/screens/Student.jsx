@@ -18,7 +18,7 @@ const StudentForm = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await axios.get('https://gamerlastborn.pythonanywhere.com/auth/courses/');
+                const response = await axios.get('http://64.23.247.7:8000/auth/courses/');
                 setCourses(response.data);
             } catch (error) {
                 console.error('Error fetching courses:', error);
@@ -40,7 +40,7 @@ const StudentForm = () => {
         try {
             // Set the default password as the uppercase surname
             const defaultPassword = formData.surname.toUpperCase();
-            await axios.post('https://gamerlastborn.pythonanywhere.com/api/users/', { ...formData, password: defaultPassword,role:'STUDENT' });
+            await axios.post('http://64.23.247.7:8000/api/users/', { ...formData, password: defaultPassword,role:'STUDENT' });
             alert('Student added successfully');
             setFormData({
                 email:'',
