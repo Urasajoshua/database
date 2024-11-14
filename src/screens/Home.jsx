@@ -26,7 +26,7 @@ function Home() {
 
     const fetchData = async () => {
       try {
-        const response = await fetch('http://13.60.203.193:8000/auth/api/dashboard-data/');
+        const response = await fetch('https://gamerlastborn.pythonanywhere.com/auth/api/dashboard-data/');
         if (!response.ok) throw new Error('Network response was not ok.');
         const data = await response.json();
         setData(data);
