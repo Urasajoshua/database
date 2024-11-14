@@ -13,7 +13,7 @@ function MyStudents() {
 
     const fetchStudents = () => {
         const user = JSON.parse(localStorage.getItem('user'));
-        axios.get(`http://13.60.203.193:8000/auth/supervisor/${user.id}/students/`)
+        axios.get(`https://gamerlastborn.pythonanywhere.com/auth/supervisor/${user.id}/students/`)
             .then(response => {
                 setStudents(response.data);
                 setFilteredStudents(response.data);
@@ -25,7 +25,7 @@ function MyStudents() {
     };
 
     const updateDissertationStatus = (dissertationId, newStatus) => {
-        axios.patch(`http://13.60.203.193:8000/dissertations/${dissertationId}/`, { status: newStatus })
+        axios.patch(`https://gamerlastborn.pythonanywhere.com/dissertations/${dissertationId}/`, { status: newStatus })
             .then(response => {
                 const updatedStudents = students.map(student => ({
                     ...student,

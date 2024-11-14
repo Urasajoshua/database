@@ -14,7 +14,7 @@ function Courses() {
     const fetchCourses = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://13.60.203.193:8000/auth/courses/');
+        const response = await axios.get('https://gamerlastborn.pythonanywhere.com/auth/courses/');
         setData(response.data);
       } catch (error) {
         setError('Failed to fetch courses');

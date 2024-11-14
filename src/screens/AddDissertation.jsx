@@ -40,7 +40,7 @@ const DissertationForm = () => {
             data.append('file', formData.file);
             data.append('student', studentId); // Add student ID to the formData
 
-            const response = await axios.post('http://13.60.203.193:8000/api/dissertations/', data, {
+            const response = await axios.post('https://gamerlastborn.pythonanywhere.com/api/dissertations/', data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     // Include an authorization header if your API requires it

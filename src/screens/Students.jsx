@@ -18,7 +18,7 @@ function Students() {
 
   const fetchStudents = async () => {
     try {
-      const response = await axios.get(`http://13.60.203.193:8000/auth/courses/${courseId}/students`);
+      const response = await axios.get(`https://gamerlastborn.pythonanywhere.com/auth/courses/${courseId}/students`);
       setStudents(response.data);
       setTotalPages(Math.ceil(response.data.length / PAGE_SIZE));
     } catch (error) {
