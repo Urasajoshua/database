@@ -14,7 +14,7 @@ function VerifiedDissertations() {
   const fetchVerifiedDissertations = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://64.23.247.7:8000/auth/verified/');
+      const response = await axios.get('http://13.60.203.193:8000/auth/verified/');
       setData(response.data);
     } catch (error) {
       setError('Failed to fetch verified dissertations');

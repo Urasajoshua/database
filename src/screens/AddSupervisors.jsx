@@ -13,7 +13,7 @@ const SupervisorForm = () => {
     useEffect(() => {
         const fetchSupervisors = async () => {
             try {
-                const response = await axios.get('https://gamerlastborn.pythonanywhere.com/api/users/?role=SUPERVISOR');
+                const response = await axios.get('http://13.60.203.193:8000/api/users/?role=SUPERVISOR');
                 setSupervisors(response.data);
             } catch (error) {
                 console.error('Error fetching supervisors:', error);
@@ -58,7 +58,7 @@ const SupervisorForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://gamerlastborn.pythonanywhere.com/api/assign_students_to_supervisor/', formData);
+            await axios.post('http://13.60.203.193:8000/api/assign_students_to_supervisor/', formData);
             alert('Students assigned to supervisor successfully');
             setFormData({
                 supervisor: '',

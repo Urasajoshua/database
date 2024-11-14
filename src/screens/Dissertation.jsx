@@ -14,7 +14,7 @@ function Dissertation() {
   const fetchDissertations = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://64.23.247.7:8000/api/dissertations/');
+      const response = await axios.get('http://13.60.203.193:8000/api/dissertations/');
       setData(response.data);
     } catch (error) {
       setError('Failed to fetch dissertations');
@@ -28,7 +28,7 @@ function Dissertation() {
 
   const handleStatusChange = async (id, newStatus) => {
     try {
-      await axios.patch(`http://64.23.247.7:8000/api/dissertations/${id}/`, { status: newStatus });
+      await axios.patch(`http://13.60.203.193:8000/api/dissertations/${id}/`, { status: newStatus });
       fetchDissertations(); // Refresh data after updating
     } catch (error) {
       setError('Failed to update status');
