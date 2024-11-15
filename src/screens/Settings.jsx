@@ -6,7 +6,7 @@ function Settings() {
     const userRole = user?.role;
 
     return (
-        <div className="p-6 bg-orange-900 min-h-screen">
+        <div className="p-6 bg-orange-900 min-h-screen md:ml-64">
             <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
                 <div className="flex flex-col md:flex-row md:justify-around space-y-4 md:space-y-0">
                     {userRole === 'ADMIN' && (
