@@ -22,7 +22,7 @@ const SupervisorForm = () => {
 
         const fetchStudents = async () => {
             try {
-                const response = await axios.get('/api/users/?role=STUDENT');
+                const response = await axios.get('https://gamerlastborn.pythonanywhere.com/api/users/?role=STUDENT');
                 setStudents(response.data);
             } catch (error) {
                 console.error('Error fetching students:', error);
@@ -106,7 +106,7 @@ const SupervisorForm = () => {
                             onChange={handleStudentChange}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                         >
-                            {students.map((student) => (
+                            {students?.map((student) => (
                                 <option key={student.id} value={student.id}>
                                     {student.firstname} {student.surname}
                                 </option>

@@ -58,7 +58,7 @@ function MyStudents() {
         const statusOptions = ['PENDING', 'APPROVED', 'REJECTED'];
 
         return (
-            <div className="relative">
+            <div className="relative md:ml-64">
                 <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className="text-blue-500 focus:outline-none"
@@ -86,7 +86,7 @@ function MyStudents() {
     };
 
     return (
-        <div className='p-4'>
+        <div className='p-4 md:ml-64'>
             {error && <p className='text-red-500 mb-4'>{error}</p>}
             <div className='mb-4 py-4'>
                 <input

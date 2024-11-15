@@ -63,7 +63,7 @@ const StudentForm = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-2xl">
+        <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-2xl md:ml-64">
            
             {errors.global && <div className="text-red-500 mb-4 text-center">{errors.global}</div>}
             <form onSubmit={handleSubmit} className="space-y-4">

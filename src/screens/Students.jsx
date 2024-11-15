@@ -45,7 +45,7 @@ function Students() {
   };
 
   return (
-    <div className="p-4 sm:p-6 bg-orange-900 min-h-screen">
+    <div className="p-4 sm:p-6 bg-orange-900 min-h-screen md:ml-64 ">
       <div className="mb-6">
         <div className="flex justify-center">
           <input
